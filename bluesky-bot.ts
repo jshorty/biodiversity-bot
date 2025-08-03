@@ -188,8 +188,35 @@ async function generateBirdPost(): Promise<{ text: string, metadata: { title: st
 
   const macaulayUrl = `https://macaulaylibrary.org/asset/${randomAssetId}/embed`;
 
-  const text = `${selectedBird!.English_name_AviList} (${selectedBird!.Scientific_name})\n\n${macaulayUrl}`;
+  const statusMap = {
+    EX: "Extinct",
+    EW: "Extinct in the Wild",
+    CR: "Critically Endangered",
+    EN: "Endangered",
+    VU: "Vulnerable",
+    NT: "Near Threatened",
+    LC: "Least Concern",
+    DD: "Data Deficient",
+    NE: "Not Evaluated"
+  }
+
+  
+  let text = `${selectedBird!.English_name_AviList} (${selectedBird!.Scientific_name})\n\nFamily ${selectedBird!.Family} (${selectedBird!.Family_English_name})\n`;
+  let footer = `Source: https://doi.org/10.2173/avilist.v2025`;
+  let status = `IUCN status: ${statusMap[selectedBird!.IUCN_Red_List_Category] || 'Unknown'}\n\n`;
+  if ((text + footer + status).length < 300) {
+    footer = status + footer;
+  }
+  if (selectedBird!.Range && selectedBird!.Range.length + text.length + footer.length < 300) {
+    text += `Range: ${selectedBird!.Range}\n`;
+  }
   console.log('Fetching page metadata for link card...');
+  
+  text += footer;
+  if (text.length > 300) {
+    throw new Error('Generated post text exceeds 300 characters limit');
+  }
+  
   const metadata = await fetchPageMetadata(macaulayUrl);
   return { text, metadata };
 }
