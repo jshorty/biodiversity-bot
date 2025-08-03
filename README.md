@@ -6,7 +6,9 @@ The codebase itself is released under CC0— see [LICENSE.md](LICENSE.md). Howev
 
 ### Citations and licensing for data sources
 
-#### `data/avilist2025.csv`
+#### `data/avilist2025_spp_filtered.csv`
+
+This file is derived from:
 
 AviList Core Team. 2025. AviList: The Global Avian Checklist, v2025. <https://doi.org/10.2173/avilist.v2025>
 
