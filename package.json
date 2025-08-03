@@ -1,0 +1,21 @@
+{
+  "name": "biodiversity-bot-search-media",
+  "version": "1.0.0",
+  "description": "Search media from Macaulay Library",
+  "main": "search-macaulay-for-taxon.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/search-macaulay-for-taxon.js",
+    "dev": "tsx search-macaulay-for-taxon.ts",
+    "search": "tsx search-macaulay-for-taxon.ts"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.0.0"
+  }
+}
