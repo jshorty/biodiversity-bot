@@ -1,5 +1,7 @@
 # Biodiversity Bot
 
+Bot account on Bluesky, live [@biodiversitybot.bsky.social](https://biodiversitybot.bsky.social).
+
 ## Licensing & attribution
 
 The codebase itself is released under CC0— see [LICENSE.md](LICENSE.md). However, individual data sources included under the `data` directory have their own licenses.
