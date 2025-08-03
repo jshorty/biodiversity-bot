@@ -8,9 +8,14 @@
     "build": "tsc",
     "start": "node dist/search-macaulay-for-taxon.js",
     "dev": "tsx search-macaulay-for-taxon.ts",
-    "search": "tsx search-macaulay-for-taxon.ts"
+    "search": "tsx search-macaulay-for-taxon.ts",
+    "bot": "tsx bluesky-bot.ts",
+    "bot:dry-run": "tsx bluesky-bot.ts --dry-run"
   },
   "dependencies": {
+    "@atproto/api": "^0.16.0",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.1",
     "puppeteer": "^21.0.0"
   },
   "devDependencies": {
