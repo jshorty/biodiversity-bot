@@ -203,9 +203,6 @@ async function generateBirdPost(): Promise<{ text: string, metadata: { title: st
   
   let text = `${selectedBird!.English_name_AviList} (${selectedBird!.Scientific_name})\n\nFamily ${selectedBird!.Family} (${selectedBird!.Family_English_name})\n`;
   let footer = `IUCN status: ${statusMap[selectedBird!.IUCN_Red_List_Category] || 'Unknown'}\n\n`;
-  if ((text + footer + status).length < 300) {
-    footer = status + footer;
-  }
   
   if (selectedBird!.Range && selectedBird!.Range.length + text.length + footer.length < 300) {
     text += `Range: ${selectedBird!.Range}\n`;
