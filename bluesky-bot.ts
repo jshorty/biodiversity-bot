@@ -85,6 +85,35 @@ function getRandomBirdRecord(records: BirdRecord[]): BirdRecord {
   return records[randomIndex];
 }
 
+function decodeHtmlEntities(text: string): string {
+  const htmlEntities: { [key: string]: string } = {
+    '&amp;': '&',
+    '&quot;': '"',
+    '&#x27;': "'",
+    '&#39;': "'",
+    '&apos;': "'",
+    '&nbsp;': ' ',
+    '&mdash;': '—',
+    '&ndash;': '–',
+  };
+
+  let decoded = text;
+  
+  for (const [entity, replacement] of Object.entries(htmlEntities)) {
+    decoded = decoded.replace(new RegExp(entity, 'g'), replacement);
+  }
+  
+  decoded = decoded.replace(/&#(\d+);/g, (match, num) => {
+    return String.fromCharCode(parseInt(num, 10));
+  });
+  
+  decoded = decoded.replace(/&#x([0-9A-Fa-f]+);/g, (match, hex) => {
+    return String.fromCharCode(parseInt(hex, 16));
+  });
+  
+  return decoded;
+}
+
 async function uploadImageToBluesky(agent: BskyAgent, imageUrl: string): Promise<any> {
   try {
     console.log(`Uploading thumbnail from: ${imageUrl}`);
@@ -126,8 +155,8 @@ async function fetchPageMetadata(url: string): Promise<{ title: string; descript
     }
     
     return {
-      title: titleMatch ? titleMatch[1].trim() : 'Macaulay Library',
-      description,
+      title: decodeHtmlEntities(titleMatch ? titleMatch[1].trim() : 'Macaulay Library'),
+      description: decodeHtmlEntities(description),
       uri: url,
       thumbUrl: ogImageMatch ? ogImageMatch[1] : undefined
     };
