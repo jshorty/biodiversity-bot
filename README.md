@@ -17,3 +17,11 @@ AviList Core Team. 2025. AviList: The Global Avian Checklist, v2025. <https://do
 AviList: The Global Avian Checklist © 2025 by AviList Core Team is licensed under CC BY 4.0
 
 AviList Core Team: Les Christidis, Frank E. Rheindt, Marshall J. Iliff, Denis Lepage, Pamela C. Rasmussen, Paul Donald, Per Alström, Juan Ignacio Areta, Frederik Brammer, Terry Chesser, David Donsker, Bob Dowsett, Jeffrey Gerbracht, Max Kirsch, Marek Kuziemko, Markus Lagerqvist, Richard Littauer, Wayne Longmore, Janette Norman, Alan Peterson, Richard Schodde, Tom Schulenberg, Martin Stervander
+
+#### `data/mdd2.3_spp_filtered.csv`
+
+This file is derived from:
+
+Mammal Diversity Database. (2025). Mammal Diversity Database (Version 2.3) [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.17033774>
+
+Licensed under CC BY 4.0.
