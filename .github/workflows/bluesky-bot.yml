@@ -31,8 +31,26 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Determine post type
+      id: post-type
+      run: |
+        # Generate random number 1-3: mammals if 1, birds otherwise (2 or 3)
+        RANDOM_NUM=$((RANDOM % 3 + 1))
+        if [ $RANDOM_NUM -eq 1 ]; then
+          echo "POST_TYPE=mammals" >> $GITHUB_OUTPUT
+          echo "Running mammals post (random: $RANDOM_NUM)"
+        else
+          echo "POST_TYPE=birds" >> $GITHUB_OUTPUT
+          echo "Running birds post (random: $RANDOM_NUM)"
+        fi
+
     - name: Run Bluesky bot
       env:
         BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
         BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
-      run: npx tsx bluesky-bot.ts
+      run: |
+        if [ "${{ steps.post-type.outputs.POST_TYPE }}" = "mammals" ]; then
+          npx tsx bluesky-bot.ts --mammals
+        else
+          npx tsx bluesky-bot.ts
+        fi
