@@ -151,10 +151,35 @@ function getRandomBirdRecord(records: BirdRecord[]): BirdRecord {
 
 /**
  * Get a random mammal record from the CSV
+ * Re-rolls up to 2 times if the selected species is from Muridae, Soricidae, or Chiroptera
  */
 function getRandomMammalRecord(records: MammalRecord[]): MammalRecord {
-  const randomIndex = Math.floor(Math.random() * records.length);
-  return records[randomIndex];
+  const maxRerolls = 2;
+  let rerollCount = 0;
+  let selectedMammal: MammalRecord;
+  
+  do {
+    const randomIndex = Math.floor(Math.random() * records.length);
+    selectedMammal = records[randomIndex];
+    
+    // Check if we should re-roll: Muridae, Soricidae families or Chiroptera order
+    const shouldReroll = 
+      selectedMammal.family === 'Muridae' ||
+      selectedMammal.family === 'Soricidae' ||
+      selectedMammal.order === 'Chiroptera';
+    
+    if (shouldReroll && rerollCount < maxRerolls) {
+      console.log(`Re-rolling selection (${rerollCount + 1}/${maxRerolls}): ${selectedMammal.mainCommonName} is from ${selectedMammal.family === 'Muridae' || selectedMammal.family === 'Soricidae' ? 'family ' + selectedMammal.family : 'order ' + selectedMammal.order}`);
+      rerollCount++;
+    } else {
+      if (shouldReroll && rerollCount >= maxRerolls) {
+        console.log(`Keeping ${selectedMammal.mainCommonName} from ${selectedMammal.family === 'Muridae' || selectedMammal.family === 'Soricidae' ? 'family ' + selectedMammal.family : 'order ' + selectedMammal.order} after ${maxRerolls} re-rolls`);
+      }
+      break;
+    }
+  } while (rerollCount <= maxRerolls);
+  
+  return selectedMammal;
 }
 
 function decodeHtmlEntities(text: string): string {
