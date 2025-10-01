@@ -599,7 +599,7 @@ async function generateMammalPost(testSpeciesSciName?: string): Promise<{ text: 
   
   // Add distribution info if it fits
   if (distributionInfo && distributionInfo.length + text.length + footer.length < 280) {
-    text += `Distribution: ${distributionInfo}\n`;
+    text += `Range: ${distributionInfo}\n`;
   }
   
   if (text.length + footer.length < 300) {
